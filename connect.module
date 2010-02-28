@@ -1202,32 +1202,10 @@ function connect_campaign_cache_report_form_submit($form, &$form_state) {
   }
 }
 
-
-/** VIEWS **/
-/*
-function connect_views_tables() {
-  $tables = array();
-  $table  = array(
-    'name' => 'connect_data',
-    'join' => array(
-      'inner' => array(
-        'table' => 'node',
-        'field' => 'nid',
-      ),
-      'extra' => array(
-        'pid' => $parent_id
-      ),
-    ),
-    'filters' => array(
-      'connect_data' => array(
-        'name' => t('Connect: participant in action'), 
-        'help' => t('Specify the nid of a connect campaign to restrict the display to participants in that campaign'),
-        'field' => '',
-      ),
-    ),
-  );
-  $tables['connect_data'] = $table;
-  return $tables;
+/**
+ * Implementation of hook_views_api.
+ * Let Views know we're compatible with 2.x
+ */
+function connect_views_api() {
+  return array('api' => 2);
 }
-*/
-
