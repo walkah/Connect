@@ -15,7 +15,7 @@
  * implementation of hook_connect_lookup
  */
 function mpautocomplete_connect_lookup() {
-	$lookups = array(
+  $lookups = array(
     'mpautocomplete_lookup' => 'Canadian MP (autocomplete + riding list)',
   );
   return $lookups;
@@ -24,14 +24,14 @@ function mpautocomplete_connect_lookup() {
 
 function mpautocomplete_menu($may_cache) {
   $items = array();
-
-	$items['text/mpautocomplete'] = array(
-		'type' => MENU_CALLBACK);
-		'title' => 'custom text autocomplete',
-		'page callback' => 'mpautocomplete_autocomplete',
-		'access arguments' => user_access('access content'),
+  
+  $items['text/mpautocomplete'] = array(
+    'type' => MENU_CALLBACK,
+    'title' => 'custom text autocomplete',
+    'page callback' => 'mpautocomplete_autocomplete',
+    'access arguments' => user_access('access content'),
   );
-
+  
   return $items;
 }
 
