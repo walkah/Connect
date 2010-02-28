@@ -126,9 +126,7 @@ function connect_menu() {
     'type'   => MENU_LOCAL_TASK,
     'weight' => 5,
     'page callback'    => 'connect_node_config_functions',
-    'page arguments'   => array(1),
     'access callback'  => 'connect_menuitem_admin_access',
-    'access arguments' => array(1),
   );
 
   // parent node: configure functions
@@ -137,9 +135,7 @@ function connect_menu() {
     'type'   => MENU_LOCAL_TASK,
     'weight' => 6,
     'page callback'    => 'connect_node_config_settings',
-    'page arguments'   => array(1),
     'access callback'  => 'connect_menuitem_admin_access',
-    'access arguments' => array(1),
   );
 
 /*
@@ -451,7 +447,7 @@ function connect_form($type = 'page') {
 
   // allow action functions to alter the form
   connect_call_hooks($parent, $form, 'form_alter', 'child');
-	
+
   // add call to action
   $form['call_to_action'] = array(
     '#prefix' => '<div id="connect-form-title">',
@@ -829,7 +825,7 @@ function connect_call_hooks(&$parent, &$child, $op = '', $target = 'child') {
   if (!$op || !$parent || ($target=='child' && !$child)) return $return;
 
   // make sure we have a child array, even if empty
-  $child = empty($child) ? array() : $child;
+  if (empty($child)) $child = array();
 
   // display what hooks are called in what order
   $debug_hooks = (connect_node_options($parent->nid, 'debug_hooks') == 'yes'); 
@@ -1015,7 +1011,7 @@ function _connect_action_display_participants($parent_nid = NULL) {
     $header = array();
     $display_fields = variable_get('connect_'. $parent->nid .'_options', FALSE);
     if (!$display_fields) return;
-    
+  
     $display_fields = unserialize($display_fields);
     foreach ($display_fields as $key => $value) {
       if (empty($value) || strpos($key, 'display_participants_fields_') === FALSE) {
@@ -1206,10 +1202,32 @@ function connect_campaign_cache_report_form_submit($form, &$form_state) {
   }
 }
 
-/**
- * Implementation of hook_views_api.
- * Let Views know we're compatible with 2.x
- */
-function connect_views_api() {
-  return array('api' => 2);
+
+/** VIEWS **/
+/*
+function connect_views_tables() {
+  $tables = array();
+  $table  = array(
+    'name' => 'connect_data',
+    'join' => array(
+      'inner' => array(
+        'table' => 'node',
+        'field' => 'nid',
+      ),
+      'extra' => array(
+        'pid' => $parent_id
+      ),
+    ),
+    'filters' => array(
+      'connect_data' => array(
+        'name' => t('Connect: participant in action'), 
+        'help' => t('Specify the nid of a connect campaign to restrict the display to participants in that campaign'),
+        'field' => '',
+      ),
+    ),
+  );
+  $tables['connect_data'] = $table;
+  return $tables;
 }
+*/
+
