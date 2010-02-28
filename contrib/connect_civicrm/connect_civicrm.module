@@ -6,11 +6,11 @@
  * Implementation of hook_connect
  **/
 function connect_civicrm_connect() {
-	$actions = array(
-		'connect_civicrm_add_participants' => array(
-		  'title' 		=> 'CiviCRM: add participants',
-		  'desc'  		=> 'Saves participant information to CiviCRM.',
-		),
+  $actions = array(
+    'connect_civicrm_add_participants' => array(
+      'title' 		=> 'CiviCRM: add participants',
+      'desc'  		=> 'Saves participant information to CiviCRM.',
+    ));
 }
 
 
