@@ -22,7 +22,7 @@ function mpautocomplete_connect_lookup() {
 }
 
 
-function mpautocomplete_menu($may_cache) {
+function mpautocomplete_menu() {
   $items = array();
   
   $items['text/mpautocomplete'] = array(
